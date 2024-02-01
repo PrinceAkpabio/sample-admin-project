@@ -1,0 +1,47 @@
+<div class="page-body">
+  <header>Login Page</header>
+  <section>
+    <title>Form</title>
+
+    <Form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        formControlName="email"
+      />
+      <span
+        *ngIf="
+          $any(loginForm.get('email')).touched &&
+          $any(loginForm.get('email')).errors
+        "
+        >Invalid email</span
+      >
+
+      <input
+        name="password"
+        type="text"
+        autocomplete="current-password"
+        formControlName="password"
+      />
+
+      <span
+        *ngIf="
+          $any(loginForm.get('password')).touched &&
+          $any(loginForm.get('password')).errors
+        "
+        >Invalid password</span
+      >
+      <button [disabled]="loginForm.touched && !loginForm.valid" type="submit">
+        Login
+      </button>
+    </Form>
+  </section>
+  <section>
+    <img src="" alt="Page Image" />
+  </section>
+
+  <footer>
+    <a [routerLink]="'/onboarding/signup'">Register here</a>
+  </footer>
+</div>

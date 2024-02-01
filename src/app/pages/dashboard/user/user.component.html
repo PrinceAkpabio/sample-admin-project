@@ -1,0 +1,45 @@
+<div class="page-body">
+  <section style="display: flex; flex-direction: row; gap: 1.5rem">
+    <span style="color: blue; cursor: pointer" [routerLink]="'/dashboard/users'"
+      >Go Back</span
+    >
+    <span style="color: red; cursor: pointer" (click)="logout()">LOG OUT</span>
+  </section>
+
+  <section>
+    <title>User</title>
+    <div style="display: columns; gap: 1rem">
+      <div>
+        <p>{{ user?.id }}</p>
+        <img [src]="user?.avatar" alt="user image" />
+        <p>Name: {{ user?.first_name }} {{ user?.last_name }}</p>
+        <p>Email: {{ user?.email }}</p>
+
+        <div
+          *ngIf="
+            user?.id !== activeUser.id &&
+            activeUser.admin &&
+            activeUser.id === user?.adminId
+          "
+          style="display: row; gap: 1rem"
+        >
+          <button (click)="toggleUpdateUserForm()">Update User</button>
+          <button (click)="deleteUser()">Delete User</button>
+        </div>
+
+        <p *ngIf="isUpdateUser">Update User Form</p>
+        <form
+          title="Update User Profile"
+          *ngIf="isUpdateUser"
+          [formGroup]="updateUserForm"
+          (ngSubmit)="updateUser()"
+        >
+          <input type="text" formControlName="first_name" />
+          <input type="text" formControlName="last_name" />
+
+          <button type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+  </section>
+</div>

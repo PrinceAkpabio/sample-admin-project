@@ -1,0 +1,58 @@
+<div class="page-body">
+  <section>
+    <span style="color: red; cursor: pointer" (click)="logout()">LOG OUT</span>
+  </section>
+  <section>
+    <title>Users List</title>
+    <div style="display: columns; gap: 1rem">
+      <div
+        style="display: flex; flex-direction: column; gap: 0.5rem"
+        *ngFor="let user of usersList"
+      >
+        <p>{{ user.id }}</p>
+        <img [src]="user.avatar" alt="user image" />
+        <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
+        <p>Email: {{ user.email }}</p>
+        <p [style]="{ color: user.admin && user.approved ? 'green' : 'black' }">
+          Status: {{ user.admin && user.approved ? "Admin" : "User" }}
+        </p>
+
+        <button
+          *ngIf="
+            activeUser.defaultAdmin &&
+            usersList[1]?.id == user.id &&
+            !user.admin
+              ? true
+              : !activeUser.defaultAdmin &&
+                activeUser.id !== user.id &&
+                activeUser.admin &&
+                !user.admin
+              ? true
+              : false
+          "
+          (click)="approveUserAsAdmin(user)"
+          style="
+            color: white;
+            background-color: green;
+            padding: 0.5rem;
+            cursor: pointer;
+          "
+        >
+          Approve as Admin
+        </button>
+
+        <button
+          style="
+            background-color: blue;
+            color: white;
+            cursor: pointer;
+            padding: 0.5rem;
+          "
+          (click)="routeToSingleUserPage(user.id)"
+        >
+          See more
+        </button>
+      </div>
+    </div>
+  </section>
+</div>

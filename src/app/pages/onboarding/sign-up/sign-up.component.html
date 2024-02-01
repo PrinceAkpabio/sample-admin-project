@@ -1,0 +1,50 @@
+<div class="page-body">
+  <header>Sign Up Page</header>
+  <section>
+    <title>Form</title>
+
+    <Form [formGroup]="signupForm" (ngSubmit)="registerUser()">
+      <input
+        name="email"
+        type="email"
+        autocomplete="email"
+        formControlName="email"
+      />
+      <span
+        *ngIf="
+          $any(signupForm.get('email')).touched &&
+          $any(signupForm.get('email')).errors
+        "
+        >Invalid email</span
+      >
+
+      <input
+        name="password"
+        type="text"
+        autocomplete="current-password"
+        formControlName="password"
+      />
+
+      <span
+        *ngIf="
+          $any(signupForm.get('password')).touched &&
+          $any(signupForm.get('password')).errors
+        "
+        >Invalid password</span
+      >
+      <button
+        [disabled]="signupForm.touched && !signupForm.valid"
+        type="submit"
+      >
+        Register
+      </button>
+    </Form>
+  </section>
+  <section>
+    <img src="" alt="Page Image" />
+  </section>
+
+  <footer>
+    <a [routerLink]="'/onboarding/login'">Login Here!</a>
+  </footer>
+</div>
