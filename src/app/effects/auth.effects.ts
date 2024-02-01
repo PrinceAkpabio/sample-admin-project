@@ -15,15 +15,10 @@ export class AuthEffects {
   handleRegisterUser(credentials: LoginCredentials) {
     return this.authService.register(credentials).pipe(
       map((value: AuthResponse) => {
-        // Fetch users in storage
-        const users: UserProfile[] = JSON.parse(
-          localStorage.getItem('Users') as string
-        );
-
         const splitCredentials = credentials.email.split('@');
         const credentialsNameList = splitCredentials[0].split('.');
 
-        const isUserRegistered = users?.filter(
+        const isUserRegistered = this.adminEffects.users?.filter(
           (user) => user.email === credentials.email
         );
 
@@ -63,11 +58,7 @@ export class AuthEffects {
     return this.authService.login(credentials).pipe(
       map((value) => {
         // Fetch users in storage
-        const users: UserProfile[] = JSON.parse(
-          localStorage.getItem('Users') as string
-        );
-
-        const isUserRegistered = users?.filter(
+        const isUserRegistered = this.adminEffects.users?.filter(
           (user) => user.email === credentials.email
         );
 
@@ -77,7 +68,7 @@ export class AuthEffects {
           throw 'User not registered';
         }
 
-        users?.forEach((user) => {
+        this.adminEffects.users?.forEach((user) => {
           //  Ensure that users can only login when they have been approved
           if (credentials.email === user.email && user.approved) {
             user.token = value.token;
@@ -88,7 +79,7 @@ export class AuthEffects {
           }
         });
         // Save updated users list and loggedIn status
-        localStorage.setItem('Users', JSON.stringify(users));
+        localStorage.setItem('Users', JSON.stringify(this.adminEffects.users));
         localStorage.setItem('loggedIn', JSON.stringify(true));
 
         return value;
