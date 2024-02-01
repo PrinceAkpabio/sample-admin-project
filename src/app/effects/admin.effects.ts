@@ -11,7 +11,22 @@ export class AdminEffects {
     // Get users from local storage if any exists
     this.users =
       JSON.parse(localStorage.getItem('Users') as string) === null
-        ? []
+        ? [
+            {
+              // Instantiate the default admin/user
+              id: 7 as number,
+              index: 0,
+              email: 'michael.lawson@reqres.in',
+              first_name: 'Michael',
+              last_name: 'Lawson',
+              avatar: `https://reqres.in/img/faces/7-image.jpg`,
+              approved: true,
+              admin: true,
+              token: '8657GJVFRY6E6',
+              defaultAdmin: true,
+              adminId: 0,
+            },
+          ]
         : JSON.parse(localStorage.getItem('Users') as string);
     this.lastApprovedUserIndex = -1; // Index of the last user who approved another user
     this.activeAdmin = JSON.parse(localStorage.getItem('activeUser') as string); // Get active admin

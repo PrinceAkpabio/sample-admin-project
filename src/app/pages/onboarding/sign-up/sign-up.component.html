@@ -1,9 +1,21 @@
 <div class="page-body">
-  <header>Sign Up Page</header>
-  <section>
+  <header style="margin-bottom: 1rem">Sign Up Page</header>
+  <section
+    style="
+      display: flex;
+      flex-direction: columns;
+      align-content: center;
+      gap: 1rem;
+      width: 100%;
+    "
+  >
     <title>Form</title>
 
-    <Form [formGroup]="signupForm" (ngSubmit)="registerUser()">
+    <Form
+      style="display: flex; flex-direction: column; gap: 1rem"
+      [formGroup]="signupForm"
+      (ngSubmit)="registerUser()"
+    >
       <input
         name="email"
         type="email"
@@ -11,6 +23,7 @@
         formControlName="email"
       />
       <span
+        style="color: red"
         *ngIf="
           $any(signupForm.get('email')).touched &&
           $any(signupForm.get('email')).errors
@@ -26,6 +39,7 @@
       />
 
       <span
+        style="color: red"
         *ngIf="
           $any(signupForm.get('password')).touched &&
           $any(signupForm.get('password')).errors
@@ -33,6 +47,11 @@
         >Invalid password</span
       >
       <button
+        [style]="{
+          color: 'white',
+          backgroundColor:
+            signupForm.touched && !signupForm.valid ? 'grey' : 'black'
+        }"
         [disabled]="signupForm.touched && !signupForm.valid"
         type="submit"
       >
@@ -40,11 +59,8 @@
       </button>
     </Form>
   </section>
-  <section>
-    <img src="" alt="Page Image" />
-  </section>
 
-  <footer>
+  <footer style="margin-top: 1rem">
     <a [routerLink]="'/onboarding/login'">Login Here!</a>
   </footer>
 </div>

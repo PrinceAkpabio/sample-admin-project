@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthResponse } from 'src/app/models/auth-models';
 import { AuthEffects } from 'src/app/effects/auth.effects';
 import { PasswordValidator } from 'src/app/effects/password-validation';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -12,6 +13,7 @@ import { PasswordValidator } from 'src/app/effects/password-validation';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  baseUrl: string = environment.baseUrl;
   constructor(private authEffect: AuthEffects, private router: Router) {}
 
   ngOnInit(): void {
@@ -27,18 +29,12 @@ export class LoginComponent implements OnInit {
         PasswordValidator.passwordStrength(),
       ]),
     });
-
-    this.loginForm.valueChanges.subscribe((value) => console.log(value));
-
-    console.log('login form: ', this.loginForm);
   }
 
   loginUser() {
     this.authEffect.handleUserLogin(this.loginForm.value).subscribe(
-      // Toast to show user is registered successfully
       // Route user to the user list page and display list
       (response: AuthResponse | any) => {
-        console.log('login response: ', response);
         this.router.navigate(['/dashboard'], {
           state: { token: response.token },
         });

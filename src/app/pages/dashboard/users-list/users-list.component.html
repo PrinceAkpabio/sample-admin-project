@@ -1,16 +1,25 @@
 <div class="page-body">
   <section>
-    <span style="color: red; cursor: pointer" (click)="logout()">LOG OUT</span>
+    <button
+      style="color: white; background-color: red; cursor: pointer"
+      (click)="logout()"
+    >
+      LOG OUT
+    </button>
   </section>
   <section>
-    <title>Users List</title>
-    <div style="display: columns; gap: 1rem">
+    <h1>Users List</h1>
+    <div style="display: columns; gap: 1rem; align-content: center">
       <div
         style="display: flex; flex-direction: column; gap: 0.5rem"
         *ngFor="let user of usersList"
       >
-        <p>{{ user.id }}</p>
-        <img [src]="user.avatar" alt="user image" />
+        <p>User ID: {{ user.id }}</p>
+        <img
+          style="width: 20rem; height: 20rem"
+          [src]="user.avatar"
+          alt="user image"
+        />
         <p>Name: {{ user.first_name }} {{ user.last_name }}</p>
         <p>Email: {{ user.email }}</p>
         <p [style]="{ color: user.admin && user.approved ? 'green' : 'black' }">
@@ -32,6 +41,7 @@
           "
           (click)="approveUserAsAdmin(user)"
           style="
+            width: 20rem;
             color: white;
             background-color: green;
             padding: 0.5rem;
@@ -43,6 +53,7 @@
 
         <button
           style="
+            width: 20rem;
             background-color: blue;
             color: white;
             cursor: pointer;

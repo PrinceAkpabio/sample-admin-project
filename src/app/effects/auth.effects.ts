@@ -15,8 +15,23 @@ export class AuthEffects {
   handleRegisterUser(credentials: LoginCredentials) {
     return this.authService.register(credentials).pipe(
       map((value: AuthResponse) => {
+        // Fetch users in storage
+        const users: UserProfile[] = JSON.parse(
+          localStorage.getItem('Users') as string
+        );
+
         const splitCredentials = credentials.email.split('@');
         const credentialsNameList = splitCredentials[0].split('.');
+
+        const isUserRegistered = users?.filter(
+          (user) => user.email === credentials.email
+        );
+
+        // Check if user is registered
+        if (isUserRegistered?.length !== 0) {
+          alert('User already registered');
+          throw 'User already registered';
+        }
 
         // Instantiate the new user
         const user = {

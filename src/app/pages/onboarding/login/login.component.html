@@ -1,47 +1,62 @@
 <div class="page-body">
-  <header>Login Page</header>
-  <section>
-    <title>Form</title>
+  <header style="margin-bottom: 1rem">Login Page</header>
+  <section style="display: flex; flex-direction: row; gap: 0.5rem; width: 100%">
+    <section
+      style="display: flex; flex-direction: columns; gap: 1rem; width: 50%"
+    >
+      <title>Form</title>
 
-    <Form [formGroup]="loginForm" (ngSubmit)="loginUser()">
-      <input
-        name="email"
-        type="email"
-        autocomplete="email"
-        formControlName="email"
-      />
-      <span
-        *ngIf="
-          $any(loginForm.get('email')).touched &&
-          $any(loginForm.get('email')).errors
-        "
-        >Invalid email</span
+      <Form
+        style="display: flex; flex-direction: column; gap: 1rem"
+        [formGroup]="loginForm"
+        (ngSubmit)="loginUser()"
       >
+        <input
+          name="email"
+          type="email"
+          autocomplete="email"
+          formControlName="email"
+        />
+        <span
+          style="color: red"
+          *ngIf="
+            $any(loginForm.get('email')).touched &&
+            $any(loginForm.get('email')).errors
+          "
+          >Invalid email</span
+        >
 
-      <input
-        name="password"
-        type="text"
-        autocomplete="current-password"
-        formControlName="password"
-      />
+        <input
+          name="password"
+          type="text"
+          autocomplete="current-password"
+          formControlName="password"
+        />
 
-      <span
-        *ngIf="
-          $any(loginForm.get('password')).touched &&
-          $any(loginForm.get('password')).errors
-        "
-        >Invalid password</span
-      >
-      <button [disabled]="loginForm.touched && !loginForm.valid" type="submit">
-        Login
-      </button>
-    </Form>
+        <span
+          style="color: red"
+          *ngIf="
+            $any(loginForm.get('password')).touched &&
+            $any(loginForm.get('password')).errors
+          "
+          >Invalid password</span
+        >
+        <button
+          [style]="{
+            color: 'white',
+            backgroundColor:
+              loginForm.touched && !loginForm.valid ? 'grey' : 'black'
+          }"
+          [disabled]="loginForm.touched && !loginForm.valid"
+          type="submit"
+        >
+          Login
+        </button>
+      </Form>
+    </section>
   </section>
-  <section>
-    <img src="" alt="Page Image" />
-  </section>
 
-  <footer>
+  <footer style="margin-top: 1rem">
     <a [routerLink]="'/onboarding/signup'">Register here</a>
   </footer>
 </div>

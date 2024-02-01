@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UserProfile } from 'src/app/models/user-models';
 import { UserEffects } from 'src/app/effects/user.effects';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-user',
@@ -15,6 +16,7 @@ export class UserComponent implements OnInit {
   updateUserForm!: FormGroup;
   activeUser!: UserProfile;
   usersInStorage!: UserProfile[];
+  baseUrl: string = environment.baseUrl;
   constructor(
     private userEffects: UserEffects,
     private route: ActivatedRoute,

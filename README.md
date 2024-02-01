@@ -1,27 +1,56 @@
-# WakanowInterviewProject
+# WakanowInterviewProject - Sample Admin application
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.13.
+# Introduction
 
-## Development server
+This is a sample administrative application which provides an admin the privileges of:
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+        i.  Approving a user for login
+        ii. Changing the admin status of a user
+        iii. Updating and deleting user records
 
-## Code scaffolding
+# Getting Started
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+1. Installation process
 
-## Build
+Install the web app by cloning this repo using the git command "git clone #repoURL". Once cloned, include the environment variables typescript file, and run "npm install" to install all dependencies.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+To build the web app, take the following steps
 
-## Running unit tests
+        i. Environment variables:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+            Ensure the variables found in the environment.deploy.ts file as available;
 
-## Running end-to-end tests
+            baseUrl - the url used to make http request to the backend resource.
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+            value - https://reqres.in/
 
-## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+        ii. Building the web app for a specific brand:
+
+            To build the app, run the command "ng build" in the command line.
+
+
+        iii. Test the deployed web app in a browser of your choice. Note that using an incognito browser tab will display the   latest build updates faster than a regular browser tab
+
+        iv. The below information will be used to test and run the application
+                •	Default admin email - michael.lawson@reqres.in
+                •	Default admin password - qwerTy123!
+                •	Users emails to be used for testing -
+                        - lindsay.ferguson@reqres.in
+                        - tobias.funke@reqres.in
+                        - byron.fields@reqres.in
+                        - george.edwards@reqres.in
+                        - rachel.howell@reqres.in
+                •	User passwords for testing - qwerTy123!
+
+2. Software dependencies
+
+   - rxjs
+
+# Challenges
+
+While tackling this sample project, I encountered some challenges, particularly in managing time effectively.
+
+The implementation involved utilizing a queue data structure to track admins and their respective user privileges, incorporating CRUD methods akin to array methods.
+
+Despite time constraints preventing the addition of intricate frontend UI elements like micro-interactions and route loading animations, I prioritized developing robust logic for admin approval processes, user management, and form input validations.
